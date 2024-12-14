@@ -1,8 +1,8 @@
 // Sample data to simulate search results
-const searchResults = [
-  { placeName: "Paris", country: "France", countryId: "FR" },
-  { placeName: "Tokyo", country: "Japan", countryId: "JP" },
-  { placeName: "New York", country: "USA", countryId: "US" },
+let searchResults = [
+  // { placeName: "Paris", country: "France", countryId: "FR" },
+  // { placeName: "Tokyo", country: "Japan", countryId: "JP" },
+  // { placeName: "New York", country: "USA", countryId: "US" },
 ];
 const resultsPerPage = 3; // Number of results per page
 let currentPage = 1;
@@ -10,6 +10,7 @@ let currentPage = 1;
 // Function to display results in the table
 
 function displayResults(results, page) {
+  console.log("results ", results);
   const tableBody = document.querySelector("#placesTableBody");
   tableBody.innerHTML = ""; // Clear previous results
 
@@ -26,10 +27,10 @@ function displayResults(results, page) {
     const row = document.createElement("tr");
     row.innerHTML = `
           <td>${start + index + 1}</td>
-          <td>${result.placeName}</td>
+          <td>${result.city}</td>
           <td>
               <img src="https://flagsapi.com/${
-                result.countryId
+                result.countryCode
               }/shiny/32.png" alt="${result.country} Flag">
               ${result.country}
           </td>
@@ -64,17 +65,29 @@ function filterResults(query) {
   displayResults(filteredResults, 1);
 }
 
-async function fetchPlaces(){
-  https://wft-geo-db.p.rapidapi.com/v1/geo/cities
-}
-
-
-function fetchResults() {
+async function fetchResults() {
   document.getElementById("spinner").style.display = "block";
-  setTimeout(() => {
-    document.getElementById("spinner").style.display = "none";
-    displayResults(searchResults, currentPage); // Display sample results
-  }, 2000);
+
+  try {
+    const response = await fetch(
+      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
+      {
+        headers: {
+          "x-rapidapi-key":
+            "", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
+          "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    searchResults = [...data.data];
+  } catch (error) {
+    console.error("Error:", error);
+  }
+  document.getElementById("spinner").style.display = "none";
+
+  displayResults(searchResults, currentPage); // Display sample results
 }
 
 fetchResults();
