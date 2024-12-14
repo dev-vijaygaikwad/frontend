@@ -21,9 +21,23 @@
         </thead>
         <tbody id="placesTableBody"></tbody>
       </table>
-      <div class="pagination">
-        <button id="prev-page">Previous</button> <span id="page-info"></span>
-        <button id="next-page">Next</button>
+      <div class="pagination-wrapper">
+        <div class="pagination">
+          <button id="prev-page">Previous</button>
+          <span id="page-info"></span>
+          <button id="next-page">Next</button>
+        </div>
+        <div class="row-per-page-wrapper">
+          <input
+            type="number"
+            id="rows-per-page"
+            min="5"
+            max="10"
+            default="5"
+            value="5"
+          />
+          <span id="rows-per-page-warning"></span>
+        </div>
       </div>
     </div>
     <script src="index.js"></script>

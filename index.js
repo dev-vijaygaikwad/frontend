@@ -4,7 +4,7 @@ let searchResults = [
   // { placeName: "Tokyo", country: "Japan", countryId: "JP" },
   // { placeName: "New York", country: "USA", countryId: "US" },
 ];
-const resultsPerPage = 3; // Number of results per page
+let resultsPerPage = 5; // Number of results per page
 let currentPage = 1;
 
 // Function to display results in the table
@@ -29,10 +29,13 @@ function displayResults(results, page) {
           <td>${start + index + 1}</td>
           <td>${result.city}</td>
           <td>
+            <div class="country-item">
               <img src="https://flagsapi.com/${
                 result.countryCode
               }/shiny/32.png" alt="${result.country} Flag">
+              <span>  </span>
               ${result.country}
+              </div>
           </td>
       `;
     tableBody.appendChild(row);
@@ -59,22 +62,22 @@ function filterResults(query) {
   }
   const filteredResults = searchResults.filter(
     (result) =>
-      result.placeName.toLowerCase().includes(query.toLowerCase()) ||
+      result.city.toLowerCase().includes(query.toLowerCase()) ||
       result.country.toLowerCase().includes(query.toLowerCase())
   );
   displayResults(filteredResults, 1);
 }
 
-async function fetchResults() {
+async function fetchResults(resultsPerPage) {
   document.getElementById("spinner").style.display = "block";
 
   try {
     const response = await fetch(
-      "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
+      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=${resultsPerPage}`,
       {
         headers: {
           "x-rapidapi-key":
-            "", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
+            "API_KEY", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
           "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
         },
       }
@@ -90,7 +93,7 @@ async function fetchResults() {
   displayResults(searchResults, currentPage); // Display sample results
 }
 
-fetchResults();
+fetchResults(resultsPerPage);
 
 // Event listener for the search
 document
@@ -101,7 +104,7 @@ document
       if (query) {
         filterResults(query);
       } else {
-        fetchResults();
+        fetchResults(resultsPerPage);
       }
     }
   });
@@ -127,3 +130,18 @@ document.getElementById("next-page").addEventListener("click", function () {
     displayResults(searchResults, currentPage);
   }
 });
+
+document
+  .getElementById("rows-per-page")
+  .addEventListener("input", function (event) {
+    // Get the current value of the text box
+    const currentValue = event.target.value;
+    if (currentValue < 5 || currentValue > 10) {
+      document.getElementById("rows-per-page-warning").innerHTML =
+        "Please enter correct value";
+    } else {
+      document.getElementById("rows-per-page-warning").innerHTML = "";
+      resultsPerPage = currentValue;
+      fetchResults(resultsPerPage);
+    }
+  });
