@@ -7,12 +7,12 @@
     <title>Search Places</title>
   </head>
   <body>
-    <div>
+    <div class="main">
       <div class="search-container">
         <input type="text" id="search" placeholder="Search places..." />
         <span class="shortcut-hint">CMD + /</span>
       </div>
-
+      <div id="spinner">Loading...</div>
       <table id="placesTable">
         <thead>
           <th>#</th>
@@ -21,6 +21,10 @@
         </thead>
         <tbody id="placesTableBody"></tbody>
       </table>
+      <div class="pagination">
+        <button id="prev-page">Previous</button> <span id="page-info"></span>
+        <button id="next-page">Next</button>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>

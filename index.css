@@ -3,12 +3,15 @@ body {
   padding: 0;
   border: 0;
   font: inherit;
-  vertical-align: baseline;
+
   font-size: 16px;
   color: rgb(33, 37, 41);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.main {
+  margin: 1em;
 }
 
 .search-container {
@@ -17,8 +20,8 @@ body {
 }
 
 .shortcut-hint {
-  position: absolute;
-  right: 10px;
+  position: relative;
+  right: 80px;
   top: 50%;
   transform: translateY(-50%);
   color: #888;
@@ -45,7 +48,24 @@ body {
 #search:disabled {
   background-color: rgb(233, 236, 239);
 }
+
+#spinner {
+  display: none;
+  text-align: center;
+  margin-block: 1em;
+}
 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
 }
 table td,
 table th {
@@ -54,4 +74,14 @@ table th {
 }
 table th {
   font-weight: 700;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
 }
