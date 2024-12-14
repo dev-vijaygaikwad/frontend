@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div>
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search places..." />
+        <span class="shortcut-hint">CMD + /</span>
+      </div>
+
+      <table id="placesTable">
+        <thead>
+          <th>#</th>
+          <th>Place Name</th>
+          <th>Country</th>
+        </thead>
+        <tbody id="placesTableBody"></tbody>
+      </table>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
