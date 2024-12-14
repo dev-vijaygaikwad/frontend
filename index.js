@@ -1,9 +1,4 @@
-// Sample data to simulate search results
-let searchResults = [
-  // { placeName: "Paris", country: "France", countryId: "FR" },
-  // { placeName: "Tokyo", country: "Japan", countryId: "JP" },
-  // { placeName: "New York", country: "USA", countryId: "US" },
-];
+let searchResults = [];
 let resultsPerPage = 5; // Number of results per page
 let currentPage = 1;
 
@@ -15,7 +10,8 @@ function displayResults(results, page) {
   tableBody.innerHTML = ""; // Clear previous results
 
   if (results.length === 0) {
-    tableBody.innerHTML = '<tr><td colspan="3" class="text-center">No result found</td></tr>';
+    tableBody.innerHTML =
+      '<tr><td colspan="3" class="text-center">No result found</td></tr>';
     return;
   }
 
@@ -76,8 +72,7 @@ async function fetchResults(resultsPerPage) {
       `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=${resultsPerPage}`,
       {
         headers: {
-          "x-rapidapi-key":
-            "API KEY", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
+          "x-rapidapi-key": "API KEY", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
           "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
         },
       }
