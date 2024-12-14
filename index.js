@@ -15,7 +15,7 @@ function displayResults(results, page) {
   tableBody.innerHTML = ""; // Clear previous results
 
   if (results.length === 0) {
-    tableBody.innerHTML = '<tr><td colspan="3">No result found</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="3" class="text-center">No result found</td></tr>';
     return;
   }
 
@@ -77,7 +77,7 @@ async function fetchResults(resultsPerPage) {
       {
         headers: {
           "x-rapidapi-key":
-            "API_KEY", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
+            "API KEY", // get your key from https://rapidapi.com/wirefreethought/api/geodb-cities
           "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
         },
       }
